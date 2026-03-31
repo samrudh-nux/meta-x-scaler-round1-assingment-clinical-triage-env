@@ -1,7 +1,6 @@
 ------
-#Creator: Samrudh 
--https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u 
----
+Creator: Samrudh 
+------
 # 🏥 ClinicalTriageEnv — Clinical Decision Intelligence Engine
 
 <div align="center">
@@ -566,13 +565,13 @@ HuggingFace Spaces imposes standard rate limits. For high-volume training runs (
 If you use ClinicalTriageEnv in your research or competition submission, please cite:
 
 ```bibtex
-@software{clinicaltriagenenv2025,
+@software{clinicaltriagenenv2026,
   author    = {samrudh-nux},
   title     = {ClinicalTriageEnv: A Clinical Decision Intelligence Environment for RL},
-  year      = {2025},
+  year      = {2026},
   publisher = {HuggingFace},
   url       = {https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u},
-  note      = {OpenEnv Hackathon 2025}
+  note      = {OpenEnv Hackathon 2026}
 }
 ```
 
@@ -592,6 +591,6 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-Built for **OpenEnv Hackathon 2025** · MIT License · [HuggingFace Space](https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u)
+Built for **OpenEnv Hackathon 2026** · MIT License · [HuggingFace Space](https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u)
 
 </div>

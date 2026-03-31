@@ -1,6 +1,6 @@
 ------
 #Creator: Samrudh 
-link to hugging face -https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u 
+**-https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u 
 ---
 title: ClinicalTriageEnv
 emoji: 🏥

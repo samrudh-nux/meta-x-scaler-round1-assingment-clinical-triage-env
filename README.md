@@ -19,6 +19,8 @@ tags:
   - rl-training
 short_description: "The first OpenEnv environment where AI agents learn life-or-death clinical decisions"
 ---
+Creator - Samrudh 
+---
 
 <div align="center">
 
@@ -31,7 +33,7 @@ short_description: "The first OpenEnv environment where AI agents learn life-or-
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed?style=flat-square&logo=docker&logoColor=white)](https://docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
-[![HF Space](https://img.shields.io/badge/🤗_Space-Running-ff6b35?style=flat-square)](https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u2)
+[![HF Space](https://img.shields.io/badge/🤗_Space-Running-ff6b35?style=flat-square)](https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u2) #CLICK RUNNING TO WATCH LIVE DEMO
 
 <br/>
 

@@ -37,7 +37,7 @@ Creator - Samrudh
 
 <br/>
 
-**250,000 people die from preventable medical errors every year in the US alone.**  
+**550,000 people die from preventable medical errors every year in the India alone.**  
 **No RL environment has ever trained AI agents to prevent them — until now.**
 
 <br/>
@@ -60,7 +60,7 @@ Every other OpenEnv environment trains agents to play games, write code, or brow
 
 **ClinicalTriageEnv trains agents to reason like physicians.**
 
-The gap it fills is real: emergency departments worldwide use the ESI triage algorithm for **140 million+ ED visits annually**. Sepsis kills **11 million people per year** globally — and 7% more patients die for every hour of delayed treatment. Drug-drug interactions cause **125,000 deaths annually** in the US.
+The gap it fills is real: emergency departments worldwide use the ESI triage algorithm for **140 million+ ED visits annually**. Sepsis kills **11 million people per year** globally — and 7% more patients die for every hour of delayed treatment. Drug-drug interactions cause **4,00,000 deaths annually** in the India.
 
 An AI agent trained on this environment learns the same clinical reasoning framework used by actual clinicians — with graders that enforce the same safety standards medical licensing boards do.
 

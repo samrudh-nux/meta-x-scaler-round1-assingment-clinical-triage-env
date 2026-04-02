@@ -33,7 +33,7 @@ Creator - Samrudh
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ed?style=flat-square&logo=docker&logoColor=white)](https://docker.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
-[![HF Space](https://img.shields.io/badge/🤗_Space-Running-ff6b35?style=flat-square)](https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u2) #CLICK RUNNING TO WATCH LIVE DEMO
+[![HF Space](https://img.shields.io/badge/🤗_Space-Running-ff6b35?style=flat-square)](https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv) #CLICK RUNNING TO WATCH LIVE DEMO
 
 <br/>
 
@@ -378,8 +378,8 @@ curl -X POST $SPACE_URL/step \
 
 ```bash
 # Clone the Space
-git clone https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u2
-cd my-healthcare-ev4u2
+git clone https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv
+cd ClinicalTriageEnv
 
 # Install dependencies
 pip install -r requirements.txt
@@ -476,7 +476,7 @@ print(f"Sepsis Hard Score: {info2['grade']:.3f}")      # → 0.812
 ## ✦ Project Structure
 
 ```
-my-healthcare-ev4u2/
+my-healthcare-ClinicalTriageEnv/
 ├── app.py              # FastAPI server + multi-agent backend + dashboard (47 kB)
 ├── environment.py      # Core env: reset() / step() / state() + reward shaping (17 kB)
 ├── models.py           # Typed Pydantic models: Action / Observation / State (9 kB)
@@ -534,7 +534,7 @@ All scenarios are grounded in real clinical guidelines:
 from openenv_client import ClinicalTriageEnvClient
 
 # Connect to running Space
-env = ClinicalTriageEnvClient(base_url="https://samrudh-nux-my-healthcare-ev4u2.hf.space")
+env = ClinicalTriageEnvClient(base_url="https://samrudh-nux-ClinicalTriageEnv.hf.space")
 
 # Standard gymnasium-style loop
 obs = env.reset(task_id="triage_medium")
@@ -569,7 +569,7 @@ The environment's reward function is shaped for GRPO training — partial reward
   title        = {ClinicalTriageEnv: An OpenEnv Environment for Clinical Decision-Making},
   author       = {samrudh-nux},
   year         = {2026},
-  url          = {https://huggingface.co/spaces/samrudh-nux/my-healthcare-ev4u2},
+  url          = {https://huggingface.co/spaces/samrudh-nux/my-ClinicalTriageEnv},
   note         = {OpenEnv Hackathon 2026 submission. MIT License.}
 }
 ```

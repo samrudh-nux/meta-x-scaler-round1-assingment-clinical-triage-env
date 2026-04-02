@@ -37,7 +37,7 @@ Creator - Samrudh
 
 <br/>
 
-**550,000 people die from preventable medical errors every year in the India alone.**  
+**5,50,000 people die from preventable medical errors every year in the India alone.**  
 **No RL environment has ever trained AI agents to prevent them — until now.**
 
 <br/>
@@ -584,7 +584,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-**Built for the OpenEnv Hackathon 2025**  
+**Built for the OpenEnv Hackathon 2026**  
 *Meta PyTorch × Hugging Face*
 
 *The environments that train agents to save lives.*

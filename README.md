@@ -25,9 +25,9 @@ short_description: Enterprise Clinical AI Training Environment — Multi-Agent T
 
 **Train · Evaluate · Benchmark · Deploy** clinical AI agents on life-critical emergency medicine scenarios — with real-time multi-agent reasoning, mortality risk scoring, and full OpenAI Gym–compatible API.
 
-[**🚀 Launch Live Demo**](https://samrudh-nux-clinicaltriageenv.hf.space) &nbsp;·&nbsp; [**📖 API Docs**](https://samrudh-nux-clinicaltriageenv.hf.space/docs) &nbsp;·&nbsp; [**⚖️ Benchmark**](https://samrudh-nux-clinicaltriageenv.hf.space/#ai-vs-ai) &nbsp;·&nbsp; [**📊 Leaderboard**](https://samrudh-nux-clinicaltriageenv.hf.space/#leaderboard)
-
-</div>
+[![API Docs](https://img.shields.io/badge/📖%20Swagger-API%20Docs-009688?style=for-the-badge)](https://samrudh-nux-clinicaltriageenv.hf.space/docs)
+[![ReDoc](https://img.shields.io/badge/📄%20ReDoc-Reference-555?style=for-the-badge)](https://samrudh-nux-clinicaltriageenv.hf.space/redoc)
+[![Leaderboard](https://img.shields.io/badge/📊-Leaderboard-orange?style=for-the-badge)](https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv)
 
 ---
 

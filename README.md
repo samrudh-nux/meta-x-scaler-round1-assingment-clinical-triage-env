@@ -21,7 +21,7 @@ short_description: Enterprise Clinical AI Training Environment — Multi-Agent T
 
 # 🏥 ClinicalTriageEnv
 
-### *The World's First Open Reinforcement Learning Environment for Clinical AI Safety*
+### *The First Open Reinforcement Learning Environment for Clinical AI Safety*
 
 **Train · Evaluate · Benchmark · Deploy** clinical AI agents on life-critical emergency medicine scenarios — with real-time multi-agent reasoning, mortality risk scoring, and full OpenAI Gym–compatible API.
 
@@ -33,7 +33,7 @@ short_description: Enterprise Clinical AI Training Environment — Multi-Agent T
 
 ## 🎯 The Problem We're Solving
 
-Every year, **250,000+ Americans die** from medical errors — the third leading cause of death. A large fraction of these are **preventable triage failures**, medication errors, and delayed sepsis recognition. AI systems are increasingly being deployed in clinical settings, yet there is **no rigorous, open benchmark environment** to train and evaluate them safely before they touch real patients.
+Every year, **4,50,000+ Indians die** from medical errors — the third leading cause of death. A large fraction of these are **preventable triage failures**, medication errors, and delayed sepsis recognition. AI systems are increasingly being deployed in clinical settings, yet there is **no rigorous, open benchmark environment** to train and evaluate them safely before they touch real patients.
 
 **ClinicalTriageEnv changes that.**
 

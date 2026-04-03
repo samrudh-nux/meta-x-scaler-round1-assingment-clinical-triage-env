@@ -1,16 +1,3 @@
-"""
-Clinical Triage & Medication Safety Environment
-==============================================================================
-Main environment class implementing OpenEnv spec:
-  - reset() → initial observation
-  - step(action) → (observation, reward, done, info)
-  - state() → current episode state
-Three tasks:
-  Task 1: ED Triage  is  (ESI Level Assignment)    [Easy→Hard]
-  Task 2: the  Medication Safety Review [Easy→Hard]
-  Task 3:  the Sepsis Recognition & Management         [Easy→Hard]
-"""
-
 from __future__ import annotations
 import uuid
 from typing import Any, Dict, Optional, Tuple, Union

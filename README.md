@@ -30,7 +30,7 @@ tags:
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688)](https://fastapi.tiangolo.com)
 [![OpenEnv](https://img.shields.io/badge/OpenEnv-Compatible-orange)](https://github.com/openenv)
 
-**We use a Llama-based evaluator to align RL agents with human clinical reasoning.**
+**A Llama-based evaluator to align RL agents with human clinical reasoning.**
 
 [**Live Demo →**](https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv) | [**API Docs →**](https://samrudh-nux-clinicalTriageEnv.hf.space/docs) | [**Research Paper →**](#research)
 
@@ -409,7 +409,7 @@ ClinicalTriageEnv opens several research directions:
 @software{clinicaltriagenenv2025,
   title     = {ClinicalTriageEnv: LLM-Aligned Reinforcement Learning for Emergency Triage},
   author    = {Samrudh},
-  year      = {2025},
+  year      = {2026},
   url       = {https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv},
   note      = {Uses Llama 3 70B as clinical reward evaluator to align RL agents with human reasoning},
   license   = {Apache-2.0}

@@ -28,7 +28,7 @@ tags:
 ---
 
 # 🏥 ClinicalTriageEnv
-### *The World's First LLM-Aligned RL Environment for High-Stakes Clinical Decision Making*
+### *A LLM-Aligned RL Environment for High-Stakes Clinical Decision Making*
 
 **An OpenEnv-compliant Reinforcement Learning environment where AI agents learn to save lives — evaluated by Llama 3, graded by clinical medicine.**
 
@@ -47,7 +47,7 @@ Every 60 seconds in a busy emergency department, a triage nurse makes a decision
 
 **ClinicalTriageEnv** turns this high-stakes cognitive challenge into a structured RL training problem — where agents don't just optimize a score, they learn *why* their decisions matter through real-time LLM-powered clinical reasoning feedback.
 
-> *"We use a Llama-based evaluator to align RL agents with human clinical reasoning — teaching machines not just what to decide, but how a physician thinks."*
+> *"Using a Llama-based evaluator to align RL agents with human clinical reasoning — teaching machines not just what to decide, but how a physician thinks."*
 
 This is not a toy environment. This is production-grade infrastructure for training the next generation of clinical AI agents.
 

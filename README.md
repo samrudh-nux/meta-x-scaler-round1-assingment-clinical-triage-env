@@ -17,8 +17,6 @@ tags:
 
 <div align="center">
 
-
-
 [![HuggingFace Space](https://img.shields.io/badge/🤗%20Space-ClinicalTriageEnv-blue)](https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue)](https://python.org)
@@ -32,8 +30,7 @@ tags:
 
 **An OpenEnv-compliant Reinforcement Learning environment where AI agents learn to save lives — evaluated by Llama 3, graded by clinical medicine.**
 
-[🚀 **Live Demo**](https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv) · [📖 **OpenEnv Spec**](https://github.com/meta-pytorch/OpenEnv) · [🎓 **Course**](https://github.com/huggingface/openenv-course) · [💬 **Discuss**](https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv/discussions)
-
+[🚀 **Live Demo**](https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv) . [**API Docs →**](https://samrudh-nux-clinicalTriageEnv.hf.space/docs) . [📖 **OpenEnv Spec**](https://github.com/meta-pytorch/OpenEnv) · [🎓 **Course**](https://github.com/huggingface/openenv-course) · [💬 **Discuss**](https://huggingface.co/spaces/samrudh-nux/ClinicalTriageEnv/discussions) 
 </div>
 
 ---

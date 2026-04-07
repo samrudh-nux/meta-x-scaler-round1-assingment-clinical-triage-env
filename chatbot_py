@@ -4,6 +4,7 @@ import urllib.error
 
 SYSTEM_PROMPT = """You are an expert clinical triage AI assistant embedded in ClinicalTriageEnv,
 a Reinforcement Learning simulation for emergency department triage training.
+
 Your role:
 1. CLINICAL EXPERT — Answer questions about triage protocols (START, SALT, ESI), vital signs,
    symptoms, and emergency medicine. Be concise but clinically accurate.
@@ -13,9 +14,11 @@ Your role:
    referencing specific vitals and symptoms.
 4. EDUCATOR — Help users understand under-triage vs over-triage risks, why the −50 penalty exists,
    and how safety-aware RL design works.
+
 Tone: Professional, educational, concise. Use bullet points for clarity.
 Format: Use markdown. Keep responses under 250 words unless the user asks for detail.
 Never fabricate clinical data. If unsure, say so clearly.
+
 Key environment facts:
 - Actions: High Priority, Medium Priority, Low Priority, Discharge
 - Severities: critical, moderate, mild, stable
@@ -23,20 +26,20 @@ Key environment facts:
 - Episode: 3 steps with progressive information reveal
 - Agent: Q-Learning with ε-greedy exploration + experience replay
 """
-
 # ── Fallback responses for when API key is not set ────────────────────────
-
 _FALLBACK_RESPONSES = {
     "triage": """**Clinical Triage Overview**
+
 Triage prioritises patients by urgency, not arrival order.
+
 **Standard Levels:**
 - 🔴 **Immediate (High)** — life-threatening, act within minutes (chest pain, stroke, SpO₂ <90%)
 - 🟡 **Urgent (Medium)** — serious but stable, act within 30 min (high fever, fractures)
 - 🟢 **Non-urgent (Low)** — minor complaints, can wait (sprains, mild fever)
 - ⚪ **Discharge** — no treatment needed (routine checks, resolved illness)
+
 **Key Principle:** Under-triage (missing critical patients) is far more dangerous than over-triage.
 That's why our RL reward gives −50 for under-triage vs only −5 for over-triage.""",
-
     "reward": """**Reward Function Design**
 Our reward is asymmetric for safety:
 | Outcome | Reward |
@@ -48,7 +51,6 @@ Our reward is asymmetric for safety:
 | ⏱️ Step delay | −2 per extra step |
 **Why −50 for under-triage?** Missing a critical patient can be fatal. The 10:1 penalty ratio
 teaches the RL agent to err on the side of caution — a core principle of medical ethics.""",
-
     "qlearning": """**Q-Learning in ClinicalTriageEnv**
 **Q-Learning** learns to map states → optimal actions through trial and error.
 **Key components here:**
@@ -58,28 +60,28 @@ teaches the RL agent to err on the side of caution — a core principle of medic
 - **ε-greedy:** Explores randomly at first, exploits learned policy as ε decays
 - **Experience Replay:** Stores past transitions, re-learns from them in batches
 Run 20+ training episodes to see the agent's policy stabilise!""",
-
     "vitals": """**Critical Vital Signs in Triage**
+
 | Vital | Normal | Concerning | Critical |
 |---|---|---|---|
 | SpO₂ | 95–100% | 90–94% | <90% |
 | Heart Rate | 60–100 bpm | 100–120 bpm | >120 or <50 |
 | Systolic BP | 90–160 mmHg | 80–90 mmHg | <80 mmHg |
+
 **SpO₂ <90%** → Immediate High Priority regardless of other findings.
 **HR >120 + symptoms** → Likely shock — High Priority.
 **BP <90 systolic** → Haemodynamic instability — High Priority.""",
-
     "default": """**ClinicalTriageEnv Assistant**
+
 I can help you with:
 - 🏥 **Triage protocols** — ask "how does triage work?"
 - 🧮 **Reward function** — ask "explain the reward"
 - 🤖 **Q-Learning** — ask "how does the RL agent learn?"
 - 💊 **Vital signs** — ask "what vitals indicate high priority?"
 - 📊 **Your decisions** — describe a patient case for analysis
+
 *Tip: To get full AI-powered responses, add your Anthropic API key in the Chatbot tab settings.*"""
 }
-
-
 def _get_fallback(message: str) -> str:
     msg = message.lower()
     if any(w in msg for w in ["reward","penalty","score","-50","bonus"]):
@@ -91,8 +93,6 @@ def _get_fallback(message: str) -> str:
     if any(w in msg for w in ["triage","priority","discharge","urgent","level","protocol"]):
         return _FALLBACK_RESPONSES["triage"]
     return _FALLBACK_RESPONSES["default"]
-
-
 def call_claude_api(messages: list, api_key: str) -> str:
     """Call Claude API directly via urllib (no anthropic package needed)."""
     payload = json.dumps({
@@ -101,7 +101,6 @@ def call_claude_api(messages: list, api_key: str) -> str:
         "system": SYSTEM_PROMPT,
         "messages": messages,
     }).encode("utf-8")
-
     req = urllib.request.Request(
         "https://api.anthropic.com/v1/messages",
         data=payload,
@@ -125,8 +124,6 @@ def call_claude_api(messages: list, api_key: str) -> str:
         return f"❌ API error ({e.code}): {body[:200]}"
     except Exception as ex:
         return f"❌ Connection error: {str(ex)[:200]}"
-
-
 def chat(
     user_message: str,
     history: list,
@@ -135,6 +132,7 @@ def chat(
 ) -> tuple[list, str]:
     """
     Main chat function.
+
     Args:
         user_message:    The user's message.
         history:         List of [user, assistant] pairs.
@@ -145,7 +143,6 @@ def chat(
     """
     if not user_message.strip():
         return history, ""
-
     # Build context prefix if patient is active
     context_prefix = ""
     if patient_context:
@@ -157,9 +154,7 @@ def chat(
             f"BP: {patient_context.get('blood_pressure', 'N/A')}. "
             f"Age: {patient_context.get('age', 'N/A')} years.]\n\n"
         )
-
     full_message = context_prefix + user_message
-
     if api_key and api_key.strip().startswith("sk-ant-"):
         # Build message history for API
         api_messages = []
@@ -167,17 +162,13 @@ def chat(
             api_messages.append({"role": "user",      "content": user_turn})
             api_messages.append({"role": "assistant", "content": asst_turn})
         api_messages.append({"role": "user", "content": full_message})
-
         response = call_claude_api(api_messages, api_key.strip())
     else:
         response = _get_fallback(user_message)
         if not api_key:
             response += "\n\n---\n*🔑 Add your Anthropic API key above for full AI responses.*"
-
     history = history + [[user_message, response]]
     return history, ""
-
-
 def build_patient_summary_prompt(state: dict, action: str, reward: float) -> str:
     """Generate a pre-filled prompt explaining the last triage decision."""
     syms = ", ".join(state.get("symptoms", []))

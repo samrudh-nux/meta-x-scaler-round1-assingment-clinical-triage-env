@@ -6,3 +6,4 @@ httpx==0.25.2
 anthropic>=0.20.0
 openai>=1.10.0
 reportlab==4.0.8
+openenv-core>=0.2.0

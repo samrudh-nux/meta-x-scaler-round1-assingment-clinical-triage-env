@@ -41,7 +41,7 @@ license: mit
 Emergency department triage is one of the most cognitively demanding tasks in medicine. A single wrong call — assigning a STEMI patient to the waiting room, missing bacterial meningitis, or choosing the wrong antibiotic in septic shock — can mean death within minutes.
 
 **The scale of the crisis:**
-- 🇺🇸 **4 million** ED visits per year in the India alone 
+- 🇮🇳 **4 million** ED visits per year in the India alone 
 - ⚠️ **40% of critical patients** are under-triaged in real-world settings
 - 💸 **$28 billion** in annual costs from preventable adverse events
 - ⏱️ Every **minute of delay** in sepsis treatment increases mortality by **7%**

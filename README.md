@@ -1,13 +1,3 @@
----
-title: ClinicalTriageEnv — RL Environment for Clinical AI
-emoji: 🏥
-colorFrom: blue
-colorTo: green
-sdk: docker
-pinned: true
-license: mit
----
-
 <div align="center">
 
 # 🏥 ClinicalTriageEnv

@@ -6,7 +6,7 @@ uvicorn
 python-multipart
 pydantic>=2.0.0
 
-# PDF generation — openenv-core does not touch reportlab
+
 reportlab==4.0.8
 
 # Anthropic client

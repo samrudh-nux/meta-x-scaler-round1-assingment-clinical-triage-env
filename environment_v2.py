@@ -10,10 +10,6 @@ from dataclasses import dataclass, field, asdict
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
-# ──────────────────────────────────────────────────────────────────────────────
-# ENUMS & CONSTANTS
-# ──────────────────────────────────────────────────────────────────────────────
-
 class DifficultyMode(str, Enum):
     CALM  = "calm"    # 2-3 patients, ample resources
     BUSY  = "busy"    # 5-10 patients, moderate pressure
@@ -164,10 +160,6 @@ NAMES_POOL = [
     ("Carlos", "M"), ("Sofia", "F"), ("Ahmed", "M"), ("Fatima", "F"),
 ]
 
-# ──────────────────────────────────────────────────────────────────────────────
-# DATA CLASSES
-# ──────────────────────────────────────────────────────────────────────────────
-
 @dataclass
 class PatientState:
     patient_id: str
@@ -278,9 +270,6 @@ class StepRecord:
         return asdict(self)
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-# ORACLE POLICY (deterministic physician heuristic)
-# ──────────────────────────────────────────────────────────────────────────────
 
 def _oracle_triage(patient: PatientState) -> Dict[str, Any]:
     """Ideal physician action based on ESI guidelines + vital sign thresholds."""
@@ -322,9 +311,6 @@ def _oracle_triage(patient: PatientState) -> Dict[str, Any]:
     }
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-# RULE-BASED GRADER
-# ──────────────────────────────────────────────────────────────────────────────
 
 def _grade_action(patient: PatientState, action: Dict[str, Any], reasoning: str) -> Tuple[float, Dict]:
     """
@@ -415,10 +401,7 @@ def _grade_action(patient: PatientState, action: Dict[str, Any], reasoning: str)
     }
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-# MAIN ENVIRONMENT
-# ──────────────────────────────────────────────────────────────────────────────
-
+# 
 class ClinicalTriageEnvV2:
     """
     Multi-patient queue RL environment for ClinicalTriageEnv v5.
@@ -483,9 +466,6 @@ class ClinicalTriageEnvV2:
             }
         }
 
-    # ──────────────────────────────────────────────────────────────────────────
-    # PUBLIC API
-    # ──────────────────────────────────────────────────────────────────────────
 
     def reset(self) -> Dict[str, Any]:
         """Start a new episode. Returns initial observation."""
@@ -730,9 +710,6 @@ class ClinicalTriageEnvV2:
             "current_difficulty": self.difficulty.value,
         }
 
-    # ──────────────────────────────────────────────────────────────────────────
-    # INTERNAL HELPERS
-    # ──────────────────────────────────────────────────────────────────────────
 
     def _spawn_patient(self) -> PatientState:
         """Generate a realistic patient based on difficulty acuity distribution."""

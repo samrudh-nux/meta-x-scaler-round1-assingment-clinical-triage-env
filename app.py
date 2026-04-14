@@ -10,7 +10,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, StreamingResponse, JSONResponse
 from pydantic import BaseModel, Field
 
-# ── Optional PDF ─────────────────────────────────────────────────────────────
+
 try:
     from reportlab.lib.pagesizes import A4, letter
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -25,23 +25,19 @@ try:
 except ImportError:
     PDF_AVAILABLE = False
 
-# ── Optional OpenAI (for proxy + direct) ─────────────────────────────────────
 try:
     from openai import OpenAI
     OPENAI_AVAILABLE = True
 except ImportError:
     OPENAI_AVAILABLE = False
 
-# ── Optional Anthropic ────────────────────────────────────────────────────────
+
 try:
     import anthropic
     ANTHROPIC_AVAILABLE = True
 except ImportError:
     ANTHROPIC_AVAILABLE = False
 
-# =============================================================================
-# CRITICAL: Env var helpers — always read FRESH, validator injects after boot
-# =============================================================================
 
 def _api_key() -> str:
     """Returns validator-injected API_KEY first, then HF_TOKEN as fallback."""
@@ -62,9 +58,6 @@ def _openai_key() -> str:
 def _anthropic_key() -> str:
     return os.environ.get("ANTHROPIC_API_KEY", "").strip()
 
-# =============================================================================
-# APP
-# =============================================================================
 
 app = FastAPI(
     title="ClinicalTriageEnv — Enterprise Clinical AI Platform",
@@ -81,10 +74,6 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 _sessions:       Dict[str, Dict] = {}
 _report_cache:   Dict[str, Dict] = {}
 _chat_histories: Dict[str, List] = {}
-
-# =============================================================================
-# TASK REGISTRY
-# =============================================================================
 
 TASK_REGISTRY = {
     "triage_easy":       {"name":"Emergency Triage - Easy",           "type":"triage",       "difficulty":"easy",   "max_steps":3, "description":"Assign ESI triage level to non-urgent presentation."},
@@ -109,10 +98,6 @@ MORTALITY_RISK = {
     "sepsis_medium":     {"baseline":22.0, "undertriage_mult":4.0, "delay_per_min":0.550},
     "sepsis_hard":       {"baseline":45.0, "undertriage_mult":6.0, "delay_per_min":1.200},
 }
-
-# =============================================================================
-# PATIENT DATABASE — mirrors index.html PATIENTS exactly
-# =============================================================================
 
 PATIENTS_DB = {
     "triage_easy": {
@@ -255,10 +240,6 @@ EVAL_METRICS = {
     "dataset":{"total_cases":2400,"categories":12,"source":"Synthetic dataset inspired by PubMed-QA benchmarks","validation":"5-fold stratified cross-validation"},
 }
 
-# =============================================================================
-# CLINICAL SCORING
-# =============================================================================
-
 def compute_news2(v: Dict) -> Tuple[int, str]:
     score = 0
     rr   = float(v.get("rr") or v.get("respiratory_rate") or 16)
@@ -319,9 +300,6 @@ def get_triage(news2: int, symptoms: str, risk_factors: List[str]) -> Dict:
             "css_class":"triage-low","color":"#00e5a0",
             "disposition":"Waiting area. Routine queue."}
 
-# =============================================================================
-# SYSTEM PROMPTS
-# =============================================================================
 
 SYSTEM_PROMPT = """You are NeuralMed CDS v5 — Clinical Decision Support AI trained on 2,400 synthetic cases.
 RULES:
@@ -412,9 +390,6 @@ def _get_fallback(message: str) -> str:
     if any(w in m for w in ["drug","interaction","simvastatin","ritonavir","warfarin","metformin","cyp"]): return _FALLBACK_CHAT["drugs"]
     return _FALLBACK_CHAT["default"]
 
-# =============================================================================
-# REQUEST MODELS
-# =============================================================================
 
 class VitalsInput(BaseModel):
     hr: Optional[float] = None
@@ -455,10 +430,6 @@ class ChatRequest(BaseModel):
     history: Optional[List[ChatMessage]] = []
     session_id: Optional[str] = None
     patient_context: Optional[Dict[str, Any]] = None
-
-# =============================================================================
-# SCORING HELPERS
-# =============================================================================
 
 def _score_triage_action(action: Dict, patient: Dict) -> Dict:
     """Real ESI-based scoring against correct ESI level."""
@@ -566,10 +537,6 @@ def _score_sepsis_action(action: Dict, patient: Dict) -> Dict:
         "teaching_point": patient.get("key_decision", ""),
     }
 
-# =============================================================================
-# ROUTES
-# =============================================================================
-
 @app.get("/")
 def home():
     for path in ["index.html", "/app/index.html", "static/index.html"]:
@@ -610,7 +577,6 @@ def list_tasks():
     }
 
 
-# ── /reset ────────────────────────────────────────────────────────────────────
 @app.post("/reset")
 async def reset_episode(request: Request):
     """Tolerates both JSON body and empty body."""
@@ -727,7 +693,7 @@ async def step_episode(request: Request):
     }
 
 
-# ── /analyze ──────────────────────────────────────────────────────────────────
+# ── /analyze ───────────────────────────────────
 @app.post("/analyze")
 async def analyze_patient(req: AnalyzeRequest):
     patient_id = req.patient_id or f"PTX-{datetime.now().year}-{str(uuid.uuid4())[:4].upper()}"
@@ -811,7 +777,7 @@ def _build_prompt(d: Dict) -> str:
             f"SYMPTOMS: {d.get('symptoms','')}\nRISK: {', '.join(rf) if rf else 'None'}\nReturn ONLY JSON.")
 
 
-# ── /news2 ────────────────────────────────────────────────────────────────────
+# ── /news2 ───────────────────────────────
 @app.get("/news2")
 def news2_calc(hr:Optional[float]=None, sbp:Optional[float]=None,
                temp_f:Optional[float]=None, spo2:Optional[float]=None,
@@ -831,7 +797,7 @@ def get_dataset(limit:int=10):
     return {"records":DATASET[:min(limit,len(DATASET))],"total":2400,"note":"Synthetic dataset"}
 
 
-# ── /benchmark — REAL multi-agent scoring ─────────────────────────────────────
+# ── /benchmark — REAL multi-agent scoring ─────────────────
 @app.post("/benchmark")
 async def benchmark(req: BenchmarkRequest):
     """
@@ -1090,7 +1056,7 @@ def get_chat_history(session_id: str):
     return {"session_id":session_id,"history":history,"message_count":len(history)}
 
 
-# ── /leaderboard ──────────────────────────────────────────────────────────────
+# ── /leaderboard ──────────────────────────────────
 @app.get("/leaderboard")
 def leaderboard():
     return {
@@ -1108,7 +1074,7 @@ def leaderboard():
     }
 
 
-# ── /simulate ─────────────────────────────────────────────────────────────────
+# ── /simulate ──────────────────
 @app.post("/simulate")
 async def simulate_deterioration(request: Request):
     body = {}
@@ -1165,10 +1131,6 @@ def get_patient(task_id: str):
 def list_sessions():
     return {"sessions":[{"session_id":sid,"task_id":s.get("task_id"),"steps":s.get("step_count",0)} for sid,s in _sessions.items()]}
 
-
-# =============================================================================
-# RULE-BASED FALLBACK (for /analyze)
-# =============================================================================
 
 def _fallback(data: Dict, triage: Dict, news2: int) -> Dict:
     s  = data.get("symptoms","").lower()
@@ -1228,10 +1190,6 @@ def _fallback(data: Dict, triage: Dict, news2: int) -> Dict:
         "evaluationMetrics":{"modelAccuracy":82.4,"precision":81.1,"recall":79.8,"f1":80.4,"testCases":50,"datasetNote":"Synthetic dataset"},
         "finalSummary":f"Patient with {data.get('symptoms','')[:100]}. NEWS-2 {news2} — {triage['label']} ({triage['time_to_physician']}). Rule-based DDx generated; AI engine offline. Physician assessment required.",
     }
-
-# =============================================================================
-# PDF BUILDER — enhanced
-# =============================================================================
 
 def _build_pdf(report: Dict) -> bytes:
     buf = io.BytesIO()
@@ -1374,9 +1332,8 @@ def _build_pdf(report: Dict) -> bytes:
     doc.build(s)
     return buf.getvalue()
 
-# =============================================================================
 # ENTRY POINT
-# =============================================================================
+
 
 if __name__ == "__main__":
     import uvicorn

@@ -2,14 +2,14 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install deps first for layer caching
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all source files
+
 COPY . .
 
-# Create server package if not present
+
 RUN mkdir -p server && \
     [ -f server/__init__.py ] || echo "# server package" > server/__init__.py
 
